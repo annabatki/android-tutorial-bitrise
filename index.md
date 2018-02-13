@@ -91,7 +91,37 @@ As a preparation, I created a class file: `Utils.java`, which has my `addNumbers
  ![details](images/details.png)
  
 ## UI Test
- 
+
+UI test is really useful if we wan't to skip physical testing by clicking through the UI. This is one of the best methods to check what happens on the screen for example when you tap on a button.
+
+First of all we need to start the test "record".
+
+![record](images/uitest/Run_and_Menubar_0.png)
+
+Now we need to select device to run the recording on. I have an emulator already, so I select that one.
+
+![emu](images/uitest/Select_Deployment_Target_and_activity_main_xml_-_project_-____Desktop_androidtutor_project_1.png)
+
+Then click on add assertion button.
+
+![addassertion](images/uitest/Record_Your_Test_2.png)
+
+You will see now that the app will launch on the device and after a short loading, the screen of the app will show. This is an interactive "screenshot" where you can click on the "testable" object.
+
+I select (the only one) `Hello World` TextView on the screen to check if it's content is `Hello World` for sure. As you can see it is automatically detected all the fields in the **Edit Assertion** section. Looks good, click on **Save Assertion**.
+
+![addedassertion](images/uitest/Record_Your_Test_3.png)
+
+Click **Ok** and close the popup window in which you can see your assertion list.
+Finally it will ask for a class name with a java file will be created and in which your test code will be generated. You need to have something like this:
+
+![uiresult](images/uitest/MainActivityTest_java_-_project_-____Desktop_androidtutor_project_6.png)
+
+Now you can run your UI test by selecting `connectedAndroidTest` from the gradle console or by running `./gradlew connectedAndroidTest` in terminal.
+
+![uiterminal](images/uitest/1__bash_7.png)
+
+The generated reports are available under `PROJECT_ROOT_PATH/app/build/reports/androidTests/connected/index.html` path. To see how a test report looks like if successful/failed you can check the end of the **Unit Test** section above.
  
 ## Store the code on one of the source control services
 
@@ -119,7 +149,7 @@ you should have something like this in your remote:
 
 ![repo](images/repo_test-android-bitrise.png)
 
-## Let Bitrise run your tests
+## Add your project on Bitrise
 
 1. Create a new app on Bitrise
    ![newapp](images/add_app.png)
