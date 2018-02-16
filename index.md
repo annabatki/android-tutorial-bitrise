@@ -179,7 +179,7 @@ you should have something like this in your remote:
    
 ## Configure your workflow to run Unit Test
 
-Prevously we've learnt that if we wan't to run our unit test we need to call `./gradlew test` command. To do it on Bitrise just simply replace `assembleDebug` with `test`.
+Prevously we've learnt that if we wan't to run our unit test we need to call `./gradlew test` command. To do it on Bitrise just simply replace `assembleDebug` with `test` in the Gradle Runner step's gradle task input.
 ![testtask](images/testtask.png)
 Ok.. Now we have our primary workflow configured to run test gradle task. But what about the test reports? Previously we also found out that the test reports are located under the path of: `PROJECT_ROOT_DIR/app/build/reports/tests/testDebugUnitTest/index.html`
 
@@ -223,3 +223,70 @@ And as we can see a new build is just started automatically with the fresh code.
 also the test report is 100%
 
 ![hundred](images/hundred.png)
+
+## Configure your workflow to run UI Test
+
+
+### Using AVD Manager step (running on emulator)
+
+Prevously we've learnt that if we wan't to run our UI test we need to call `./gradlew connectedAndroidTest` command. To do it on Bitrise just simply replace `assembleDebug` with `connectedAndroidTest ` in the Gradle Runner step's gradle task input.
+![testtask](images/uitest/wf/1.png)
+Ok.. Now we have our primary workflow configured to run UI Test gradle task. But what about the test reports? Previously we also found out that the test reports are located under the path of: `PROJECT_ROOT_PATH/app/build/reports/androidTests/connected/index.html`
+
+The `PROJECT_ROOT_DIR` part of the path on Bitrise is the `$BITRISE_SOURCE_DIR` environment variable. Bitrise has couple of environment variables used around, to see the complete list wisit this page: [Environment Variables](http://devcenter.bitrise.io/faq/available-environment-variables/)
+
+The another environment variable that we will need is `$BITRISE_DEPLOY_DIR`, if you copy any file in this directory, that will be exported to your build artifacts by the **Deploy to Bitrise.io** step. (In your build #1 you should also have the debug apk that generated previously by the `assembleDebug` task.)
+![artifacts](images/artifacts.png)
+
+So finally to get your report in your artifacts, add a **Script** step after your **Gradle Runner** step. (by clicking on the **+** button under **Gradle Runner**) and add the command to the Script step's content input:
+
+```
+zip -r $BITRISE_DEPLOY_DIR/reports.zip $BITRISE_SOURCE_DIR/app/build/reports/tests/testDebugUnitTest
+```
+
+Also turn on **Run if previous Step failed** option, so you can export the generated report even if your unit test failed.
+
+![testtask](images/uitest/wf/2.png)
+
+What's left is to start the emulator in time, and make sure it is running fine before we start using it. So it is highly recommended to start the emulator within one of the first steps(I usually make it to be #1) so it has the time to boot until we need it basically. We will use Wait for Android Emulator step to validate and/or wait for the emulator to finish booting, right before we need it(before running the gradle task on it). It will look like this:
+
+![testtask](images/uitest/wf/3.png)
+
+Now click on save, close the workflow editor, then start a new build from the master branch with the primary workflow by clicking on **Start/Schedule a Build** button.
+
+![startbuild](images/startbuild.png)
+
+Finally click on **Start Build** and let's wait for the result.
+
+![testtask](images/uitest/wf/4.png)
+
+### Using Virtual Device Testing for Android step (without emulator)
+
+First of all we will need to enable Android UI Testing on the app's settings tab:
+
+![testtask](images/uitest/wf/5.png)
+
+Then add an extra gradle task: assembleDebugAndroidTest in Gradle Runner step's gradle task input field:
+
+![testtask](images/uitest/wf/6.png)
+
+Now we will have the app APK and the test APK generated that can be sent out for 3rd party testing services.
+Add **Virtual Device Testing for Android** step after gradle runner, so it will send the APKs for testing.
+Make sure you have selected `instrumentation` as test type in the step.
+
+![testtask](images/uitest/wf/7.png)
+
+Now click on save, close the workflow editor, then start a new build from the master branch with the primary workflow by clicking on **Start/Schedule a Build** button.
+
+![startbuild](images/startbuild.png)
+
+Finally click on **Start Build** and let's wait for the result.
+
+As soon as the running build reaches **Virtual Device testing for Android** step you will be able to see the dashboard of your running test. The extra details will be available as soon as the test finished.
+After the build finished, click on the `Virtual Device Tests [beta]` tab:
+
+![testtask](images/uitest/wf/8.png)
+
+And after that you can see all the details of your test:
+  
+![testtask](images/uitest/wf/9.png)
