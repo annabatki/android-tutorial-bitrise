@@ -121,20 +121,17 @@ Now you can run your UI test by selecting `connectedAndroidTest` from the gradle
 
 ![uiterminal](images/uitest/1__bash_7.png)
 
-The generated reports are available under `PROJECT_ROOT_PATH/app/build/reports/androidTests/connected/index.html` path. To see how a test report looks like if successful/failed you can check the end of the **Unit Test** section above.
+The generated reports are available under `PROJECT_ROOT_PATH/app/build/reports/androidTests/connected/index.html` path. To see how a test report looks like if successful/failed, check the end of the **Unit Test** section above.
  
-## Store the code on one of the source control services
+## Store your code on one of the source control services
 
-I will use Github in this tutorial. To be able to do this, you will need a fully configured git and a basic terminal knowledge for the couple of commands that we will run.
+We use Github in this tutorial. To be able to do this, you will need a fully configured git and a basic knowledge of using a terminal (of the couple of commands that we will run). Should you need it, check out this great tutorial: [Adding an existing project to GitHub using the command line](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line)
 
-Here is a great tutorial of how to do that, so I won't describe this step-by-step:
-[Adding an existing project to GitHub using the command line](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line)
-
-What you need to push to the repository is the content of the project's root directory. You will have a structure something like this:
+What you need to push to the repository is the content of the project's root directory. You will have a structure similar to this:
 
 ![files](images/projectstructure.png)
 
-After you ran these commands:
+After you've run these commands:
 
 ```
 cd "to the project root path"
@@ -145,7 +142,7 @@ git remote add origin your-repo-remote-url-here
 git push -u origin master
 ```
 
-you should have something like this in your remote:
+... you should have something like this in your remote:
 
 ![repo](images/repo_test-android-bitrise.png)
 
@@ -155,18 +152,18 @@ you should have something like this in your remote:
    ![newapp](images/add_app.png)
 1. Select your repository
    
-   > You will be asked to connect your Github account for the first time if you don't have already.
+   > You will be asked to connect your Github account if you haven't already.
    ![selectrepo](images/select_repo.png)
-1. Setup SSH access, if you need something custom you can select `ADD OWN SSH`, otherwise we will just go for the `No, auto-add SSH key` option.
-1. Specify the branch for scan: I pushed my main code base to my master branch, so I will go with master for now. Then click **Next**.
+1. Setup SSH access, if you need something custom you can select `ADD OWN SSH`, otherwise just go for the `No, auto-add SSH key` option.
+1. Specify the branch for scanning: our main code base was pushed to the master branch, so we'll go with master for now. Then click **Next**.
    ![branch](images/master.png)
-   > After clicking on the Next button the validation of your repository will start. Bitrise will check if your git repository is fully accessible, and will scan for your project type to create the best configuration for your needs.
+   > After clicking Next the validation of your repository will be started. Bitrise will check if your git repository is fully accessible, and will scan for your project type to create the best configuration for your needs.
 1. Oh.. an Android project detected
    ![detected](images/detected.png)
-   > just click on **Next**, then **Confirm**
+   > just click **Next**, then **Confirm**
 1. Decide if you want webhooks added for your repository by Bitrise or not
-   > Registering webhooks basically wires your project's "source control events" from Github to Bitrise. This way Bitrise can be triggered for example when you push some new code to one of your branches, or when any event triggers.
-1. The first build is just started!
+   > Registering webhooks basically wires your project's "source control events" from Github to Bitrise. This way Bitrise can be triggered, for example, by pushing some new code to one of your branches, or by other trigger events.
+1. The first build has just been started!
    ![first](images/first.png)
    Click on the big green button! What you will see now is the build page.
    
@@ -174,7 +171,8 @@ you should have something like this in your remote:
    ![running](images/running.png)
    
    To access your current workflows click on the `Workflow` tab.
-   The initial workflows are: primary and deploy. Both does the same with a little difference. Primary workflow has a configured `gradle-runner` to run the gradle task **assembleDebug**, deploy workflow has the gradle task **assembleRelease**.
+
+   The initial workflows are: primary and deploy. Both do the same with a little difference. Primary workflow has a configured `gradle-runner` to run the gradle task **assembleDebug**, deploy workflow has the gradle task **assembleRelease**.
    ![workflows](images/workflows.png)
    
 ## Configure your workflow to run a Unit Test
