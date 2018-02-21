@@ -5,23 +5,23 @@ After downloading & installing Android Studio
 1. Create a new project
 ![new project](images/Welcome_to_Android_Studio.png)
 
-1. Configure `project path`, `app name`, and the `package name` of the new project
+1. Set a `project path`, an `app name`, and a `package name` for the new project
 ![configure](images/Create_New_Project.png)
 
-1. Select target SDK
+1. Select target SDK(s)
 ![sdk](images/Create_New_Project_2.png)
 
-1. Choose one of the available activity types. In this case, I use an *Empty Activity*
+1. Choose one of the available activity types. In this tutorial, *Empty Activity* is used.
 ![activity](images/Create_New_Project_3.png)
 
 ## Unit test
 
-As a preparation, I've created a class file in advance: `Utils.java`, which has an `addNumbers` function. We will test this function now to see if it works as expected. (Later we will use this function for our app functionality as well.)
+A class file (`Utils.java`) was created in advance, which has an `addNumbers` function. This function will be tested to see if it works as expected. (Later this function will be used for testing app functionality as well.)
 
 1. Add the file
 ![utils](images/add_utils_file.png)
 
-  I've used the following code snippet in the file:
+  The following code snippet was used in the file:
 
   ```
   package project.testcompany.com.mytestapplication;
@@ -36,9 +36,10 @@ As a preparation, I've created a class file in advance: `Utils.java`, which has 
 
   ```
   
-1. Luckily for us, Android Studio creates dummy test files for both UI and Unit tests. 
+1. Add the test code
+Luckily, Android Studio creates dummy test files for both UI and Unit tests. 
   ![testfiles](images/test_files.png)
-1. Double click `ExampleUnitTest.java` and add some test code
+Double click `ExampleUnitTest.java` and add the test code, for example:
 
 	```
 	package project.testcompany.com.mytestapplication;
@@ -65,7 +66,7 @@ As a preparation, I've created a class file in advance: `Utils.java`, which has 
 	    
 	}
 	```
-1. Run Unit tests and check the results
+1. Run Unit tests
 
  You can run the tests:
  1. Either via Terminal: `cd` to the root dir of the project and run `./gradlew test`
@@ -73,20 +74,22 @@ As a preparation, I've created a class file in advance: `Utils.java`, which has 
  1. or using Android Studio, for example from the project window:
    ![projectwindow](images/from_list.png)
    
+   
+1. Check the results of the Unit tests
  The report will be generated under the same path in both cases: `PROJECT_ROOT_DIR/app/build/reports/tests/testDebugUnitTest/index.html`
  
- If all your tests ran successfully you will see something like this:
+ 1. If all your tests ran successfully you will see something like this:
  
  ![successful](images/result_successful.png)
  
  
- If you have a failed test, it is very helpful to see which one failed and what the error was. Let's see what happens if we add an error:
+ 1. If you have a failed test, it is very helpful to see which one failed and what the error was. Let's see what happens if there is an error:
  
  ![mistake](images/fails.png)
  
  ![failed](images/failedresult.png)
  
- The details are also available:
+ The detailed results of the failed test are also available:
  
  ![details](images/details.png)
  
@@ -94,44 +97,44 @@ As a preparation, I've created a class file in advance: `Utils.java`, which has 
 
 A UI test is really useful if you want to skip physical testing by clicking through the UI and this is one of the best methods to check what happens on the screen for example when you tap a button.
 
-First of all, start the test "record".
+1. Start the test "record".
 
 ![record](images/uitest/Run_and_Menubar_0.png)
 
-Now select the device to run the recording on. (Here, a previously set up emulator is selected.)
+2. Select the device to run the recording on. (Here, a previously set up emulator is selected.)
 
 ![emu](images/uitest/Select_Deployment_Target_and_activity_main_xml_-_project_-____Desktop_androidtutor_project_1.png)
 
-Then click Add Assertion.
+3. Click Add Assertion.
 
 ![addassertion](images/uitest/Record_Your_Test_2.png)
 
 You will see now how the app is launched on the device and after loading, the screen of the app will show. This is an interactive "screenshot" where you can click on the "testable" object.
 
-Select the only thing available: the `Hello World` TextView on the screen to check if its content is `Hello World` for sure. As you can see it has automatically detected all the fields in the **Edit Assertion** section. Looks good, click on **Save Assertion**.
+4. Select the only thing available: the `Hello World` TextView on the screen to check if its content is `Hello World` for sure. As you can see it has automatically detected all the fields in the **Edit Assertion** section. Looks good, click on **Save Assertion**.
 
 ![addedassertion](images/uitest/Record_Your_Test_3.png)
 
-Click **Ok** and close the popup window in which you can see your assertion list.
-Finally it will ask for a class name with which a java file will be created and in which your test code will be generated. You need end up having something like this:
+5. Click **Ok** and close the popup window in which you can see your assertion list.
+6. Finally it will ask for a class name with which a java file will be created and in which your test code similar to this will be generated:
 
 ![uiresult](images/uitest/MainActivityTest_java_-_project_-____Desktop_androidtutor_project_6.png)
 
-Now you can run your UI test by selecting `connectedAndroidTest` from the gradle console or by running `./gradlew connectedAndroidTest` in terminal.
+7. Now you can run your UI test by selecting `connectedAndroidTest` from the gradle console or by running `./gradlew connectedAndroidTest` in terminal.
 
 ![uiterminal](images/uitest/1__bash_7.png)
 
-The generated reports are available under `PROJECT_ROOT_PATH/app/build/reports/androidTests/connected/index.html` path. To see how a test report looks like if successful/failed, check the end of the **Unit Test** section above.
+8. The generated reports are available under the `PROJECT_ROOT_PATH/app/build/reports/androidTests/connected/index.html` path. To see what a test report looks like if successful/failed, check the end of the **Unit Test** section above.
  
-## Store your code on one of the source control services
+## Store your code on one of the version control services
 
-We use Github in this tutorial. To be able to do this, you will need a fully configured git and a basic knowledge of using a terminal (of the couple of commands that we will run). Should you need it, check out this great tutorial: [Adding an existing project to GitHub using the command line](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line)
+GitHub is used in this tutorial. You will need a fully configured git and a basic knowledge of using a terminal (the couple of commands that we will run). Should you need it, check out this great tutorial: [Adding an existing project to GitHub using the command line](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line)
 
-What you need to push to the repository is the content of the project's root directory. You will have a structure similar to this:
+1. Push the content of the project's root directory to the repository. You will have a structure similar to this:
 
 ![files](images/projectstructure.png)
 
-After you've run these commands:
+2. Run these commands:
 
 ```
 cd "to the project root path"
@@ -142,7 +145,7 @@ git remote add origin your-repo-remote-url-here
 git push -u origin master
 ```
 
-... you should have something like this in your remote:
+3. Check if you have something like this in your remote:
 
 ![repo](images/repo_test-android-bitrise.png)
 
