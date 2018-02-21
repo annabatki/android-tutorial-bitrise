@@ -11,17 +11,17 @@ After downloading & installing Android Studio
 1. Select target SDK
 ![sdk](images/Create_New_Project_2.png)
 
-1. Choose one of the given activity type, in this case I will use an *Empty Activity*
+1. Choose one of the available activity types. In this case, I use an *Empty Activity*
 ![activity](images/Create_New_Project_3.png)
 
 ## Unit test
 
-As a preparation, I created a class file: `Utils.java`, which has my `addNumbers` function. We will test this function for now if it works as expected. (Later we will use this function for our app functionality as well.)
+As a preparation, I've created a class file in advance: `Utils.java`, which has an `addNumbers` function. We will test this function now to see if it works as expected. (Later we will use this function for our app functionality as well.)
 
 1. Add the file
 ![utils](images/add_utils_file.png)
 
-  I've used this code snippet in the file:
+  I've used the following code snippet in the file:
 
   ```
   package project.testcompany.com.mytestapplication;
@@ -36,9 +36,9 @@ As a preparation, I created a class file: `Utils.java`, which has my `addNumbers
 
   ```
   
-1. Android Studio creates dummy test files luckily, for both UI and Unit tests. We will check `ExampleUnitTest.java` for now.
+1. Luckily for us, Android Studio creates dummy test files for both UI and Unit tests. 
   ![testfiles](images/test_files.png)
-1. Add some testing code
+1. Double click `ExampleUnitTest.java` and add some test code
 
 	```
 	package project.testcompany.com.mytestapplication;
@@ -66,54 +66,54 @@ As a preparation, I created a class file: `Utils.java`, which has my `addNumbers
 	}
 	```
 1. Run Unit tests and check the results
-   
- You have multiple choices to run the tests:
- 1. Via Terminal: `cd` to the root dir of the project and run `./gradlew test`
+
+ You can run the tests:
+ 1. Either via Terminal: `cd` to the root dir of the project and run `./gradlew test`
    ![term](images/1__bash.png)
- 1. Using Android Studio, for example from the project window:
+ 1. or using Android Studio, for example from the project window:
    ![projectwindow](images/from_list.png)
    
- The report will be generated under the same path for both case: `PROJECT_ROOT_DIR/app/build/reports/tests/testDebugUnitTest/index.html`
+ The report will be generated under the same path in both cases: `PROJECT_ROOT_DIR/app/build/reports/tests/testDebugUnitTest/index.html`
  
- If all of your tests ran successfully you will see something like this:
+ If all your tests ran successfully you will see something like this:
  
  ![successful](images/result_successful.png)
  
  
- But if you have a failed test case then it can be very helpful too see which one failed and what was the error, so I made a mistake to see what it looks like:
+ If you have a failed test, it is very helpful to see which one failed and what the error was. Let's see what happens if we add an error:
  
  ![mistake](images/fails.png)
  
  ![failed](images/failedresult.png)
  
- also the details are available:
+ The details are also available:
  
  ![details](images/details.png)
  
 ## UI Test
 
-UI test is really useful if we wan't to skip physical testing by clicking through the UI. This is one of the best methods to check what happens on the screen for example when you tap on a button.
+A UI test is really useful if you want to skip physical testing by clicking through the UI and this is one of the best methods to check what happens on the screen for example when you tap a button.
 
-First of all we need to start the test "record".
+First of all, start the test "record".
 
 ![record](images/uitest/Run_and_Menubar_0.png)
 
-Now we need to select device to run the recording on. I have an emulator already, so I select that one.
+Now select the device to run the recording on. (Here, a previously set up emulator is selected.)
 
 ![emu](images/uitest/Select_Deployment_Target_and_activity_main_xml_-_project_-____Desktop_androidtutor_project_1.png)
 
-Then click on add assertion button.
+Then click Add Assertion.
 
 ![addassertion](images/uitest/Record_Your_Test_2.png)
 
-You will see now that the app will launch on the device and after a short loading, the screen of the app will show. This is an interactive "screenshot" where you can click on the "testable" object.
+You will see now how the app is launched on the device and after loading, the screen of the app will show. This is an interactive "screenshot" where you can click on the "testable" object.
 
-I select (the only one) `Hello World` TextView on the screen to check if it's content is `Hello World` for sure. As you can see it is automatically detected all the fields in the **Edit Assertion** section. Looks good, click on **Save Assertion**.
+Select the only thing available: the `Hello World` TextView on the screen to check if its content is `Hello World` for sure. As you can see it has automatically detected all the fields in the **Edit Assertion** section. Looks good, click on **Save Assertion**.
 
 ![addedassertion](images/uitest/Record_Your_Test_3.png)
 
 Click **Ok** and close the popup window in which you can see your assertion list.
-Finally it will ask for a class name with a java file will be created and in which your test code will be generated. You need to have something like this:
+Finally it will ask for a class name with which a java file will be created and in which your test code will be generated. You need end up having something like this:
 
 ![uiresult](images/uitest/MainActivityTest_java_-_project_-____Desktop_androidtutor_project_6.png)
 
@@ -171,77 +171,78 @@ git push -u origin master
    ![running](images/running.png)
    
    To access your current workflows click on the `Workflow` tab.
+
    The initial workflows are: primary and deploy. Both do the same with a little difference. Primary workflow has a configured `gradle-runner` to run the gradle task **assembleDebug**, deploy workflow has the gradle task **assembleRelease**.
    ![workflows](images/workflows.png)
    
-## Configure your workflow to run Unit Test
+## Configure your workflow to run a Unit Test
 
-Prevously we've learnt that if we wan't to run our unit test we need to call `./gradlew test` command. To do it on Bitrise just simply replace `assembleDebug` with `test` in the Gradle Runner step's gradle task input.
+Prevously we've learnt that if we wan't to run our unit test we need to call the `./gradlew test` command. To do it on Bitrise just simply replace `assembleDebug` with `test` in the Gradle Runner step's gradle task input.
 ![testtask](images/testtask.png)
-Ok.. Now we have our primary workflow configured to run test gradle task. But what about the test reports? Previously we also found out that the test reports are located under the path of: `PROJECT_ROOT_DIR/app/build/reports/tests/testDebugUnitTest/index.html`
+Ok. Now our primary workflow is configured to run a test gradle task. But what about the test reports? They are located under this path: `PROJECT_ROOT_DIR/app/build/reports/tests/testDebugUnitTest/index.html`
 
-The `PROJECT_ROOT_DIR` part of the path on Bitrise is the `$BITRISE_SOURCE_DIR` environment variable. Bitrise has couple of environment variables used around, to see the complete list wisit this page: [Environment Variables](http://devcenter.bitrise.io/faq/available-environment-variables/)
+The `PROJECT_ROOT_DIR` part of the path equals the `$BITRISE_SOURCE_DIR` environment variable on Bitrise. (See the complete list of [Environment Variables here](http://devcenter.bitrise.io/faq/available-environment-variables/)
 
-The another environment variable that we will need is `$BITRISE_DEPLOY_DIR`, if you copy any file in this directory, that will be exported to your build artifacts by the **Deploy to Bitrise.io** step. (In your build #1 you should also have the debug apk that generated previously by the `assembleDebug` task.)
+The other environment variable we needed is `$BITRISE_DEPLOY_DIR`. If you copy any file into this directory, it will be exported to your build artifacts by the **Deploy to Bitrise.io** step. (In your build #1 you should also have the debug apk that was generated previously by the `assembleDebug` task.)
 ![artifacts](images/artifacts.png)
 
-So finally to get your report in your artifacts, add a **Script** step after your **Gradle Runner** step. (by clicking on the **+** button under **Gradle Runner**) and add the command to the Script step's content input:
+So finally to get your report among your artifacts, add a **Script** step after your **Gradle Runner** step (by clicking on the **+** button under **Gradle Runner**) and adding the following command to the Script step's content input:
 
 ```
 zip -r $BITRISE_DEPLOY_DIR/reports.zip $BITRISE_SOURCE_DIR/app/build/reports/tests/testDebugUnitTest
 ```
 
-Also turn on **Run if previous Step failed** option, so you can export the generated report even if your unit test failed.
+You should also turn on the **Run if previous Step failed** option, so you can export the generated report even if your unit test has failed.
 
 ![scriptstep](images/scriptstep.png)
 
-Now click on save, close the workflow editor, then start a new build from the master branch with the primary workflow by clicking on **Start/Schedule a Build** button.
+Now click Save, close the workflow editor, then start a new build from the master branch with the primary workflow by clicking **Start/Schedule a Build**.
 
 ![startbuild](images/startbuild.png)
 
-Finally click on **Start Build** and let's wait for the result.
+Finally click **Start Build** and wait for the result.
 
 Oh... NOOO! It failed...
 ![failedtest](images/failedtest.png)
-So we can download our reports by clicking on the download button, let's see what's going on...
+Download your reports by clicking Download and check what went wrong.
 
-This is the issue I made intentionally to see how a failed test case looks like.
+It was the intentional error in the code. :)
 
 ![themistake](images/themistake.png)
 
-We will fix this on Github in the online editor. This way we will also check if we fix the code on Github and after the committed change it should start a new build automatically.
+Let's fix this on Github in the online editor. If we fix the code on Github and commit the changes, it should start a new build automatically.
 
 ![fixedmistake](images/fixedmistake.png)
 
-And as we can see a new build is just started automatically with the fresh code. It should be successful now. After couple of minutes we have the result of our hard work now:
+A new build has just been started automatically with the fresh code. It should be successful now. After a couple of minutes we'll have the result of our hard work:
 
 ![finalsuccessful](images/finalsuccessful.png)
 
-also the test report is 100%
+The test report is 100%
 
 ![hundred](images/hundred.png)
 
-## Configure your workflow to run UI Test
+## Configure your workflow to run a UI Test
 
+### Using AVD Manager step (running on an emulator)
 
-### Using AVD Manager step (running on emulator)
-
-Prevously we've learnt that if we wan't to run our UI test we need to call `./gradlew connectedAndroidTest` command. To do it on Bitrise just simply replace `assembleDebug` with `connectedAndroidTest ` in the Gradle Runner step's gradle task input.
+If we want to run a UI test we have to call `./gradlew connectedAndroidTest` command. To do this on Bitrise just replace `assembleDebug` with `connectedAndroidTest ` in the Gradle Runner step's gradle task input.
 ![testtask](images/uitest/wf/1.png)
-Ok.. Now we have our primary workflow configured to run UI Test gradle task. But what about the test reports? Previously we also found out that the test reports are located under the path of: `PROJECT_ROOT_PATH/app/build/reports/androidTests/connected/index.html`
+Ok. Our primary workflow is now configured to run a UI Test gradle task. But what about the test reports? These test reports are located under the following path: `PROJECT_ROOT_PATH/app/build/reports/androidTests/connected/index.html`
 
-The `PROJECT_ROOT_DIR` part of the path on Bitrise is the `$BITRISE_SOURCE_DIR` environment variable. Bitrise has couple of environment variables used around, to see the complete list wisit this page: [Environment Variables](http://devcenter.bitrise.io/faq/available-environment-variables/)
+The `PROJECT_ROOT_DIR` part of the path equals the `$BITRISE_SOURCE_DIR` environment variable on Bitrise. (See the complete list of [Environment Variables here](http://devcenter.bitrise.io/faq/available-environment-variables/)
 
-The another environment variable that we will need is `$BITRISE_DEPLOY_DIR`, if you copy any file in this directory, that will be exported to your build artifacts by the **Deploy to Bitrise.io** step. (In your build #1 you should also have the debug apk that generated previously by the `assembleDebug` task.)
+The other environment variable needed is `$BITRISE_DEPLOY_DIR`. If you copy any file in this directory, it will be   exported to your build artifacts by the **Deploy to Bitrise.io** step. (In your build #1 you should also have the debug apk that was generated previously by the `assembleDebug` task.)
+
 ![artifacts](images/artifacts.png)
 
-So finally to get your report in your artifacts, add a **Script** step after your **Gradle Runner** step. (by clicking on the **+** button under **Gradle Runner**) and add the command to the Script step's content input:
+So finally to get your report among your artifacts, add a **Script** step after your **Gradle Runner** step (by clicking on the **+** button under **Gradle Runner**) and adding the following command to the Script step's content input:
 
 ```
-zip -r $BITRISE_DEPLOY_DIR/reports.zip $BITRISE_SOURCE_DIR/app/build/reports/tests/testDebugUnitTest
+zip -r $BITRISE_DEPLOY_DIR/reports.zip $BITRISE_SOURCE_DIR/app/build/reports/androidTests/connected
 ```
 
-Also turn on **Run if previous Step failed** option, so you can export the generated report even if your unit test failed.
+You should also turn on the **Run if previous Step failed** option, so you can export the generated report even if your UI test has failed.
 
 ![testtask](images/uitest/wf/2.png)
 
@@ -249,7 +250,7 @@ What's left is to start the emulator in time, and make sure it is running fine b
 
 ![testtask](images/uitest/wf/3.png)
 
-Now click on save, close the workflow editor, then start a new build from the master branch with the primary workflow by clicking on **Start/Schedule a Build** button.
+Now click Save, close the workflow editor, then start a new build from the master branch with the primary workflow by clicking **Start/Schedule a Build**.
 
 ![startbuild](images/startbuild.png)
 
