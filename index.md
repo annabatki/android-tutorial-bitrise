@@ -11,17 +11,17 @@ After downloading & installing Android Studio
 1. Select target SDK
 ![sdk](images/Create_New_Project_2.png)
 
-1. Choose one of the given activity type, in this case I will use an *Empty Activity*
+1. Choose one of the available activity types. In this case, I use an *Empty Activity*
 ![activity](images/Create_New_Project_3.png)
 
 ## Unit test
 
-As a preparation, I created a class file: `Utils.java`, which has my `addNumbers` function. We will test this function for now if it works as expected. (Later we will use this function for our app functionality as well.)
+As a preparation, I've created a class file in advance: `Utils.java`, which has an `addNumbers` function. We will test this function now to see if it works as expected. (Later we will use this function for our app functionality as well.)
 
 1. Add the file
 ![utils](images/add_utils_file.png)
 
-  I've used this code snippet in the file:
+  I've used the following code snippet in the file:
 
   ```
   package project.testcompany.com.mytestapplication;
@@ -36,9 +36,9 @@ As a preparation, I created a class file: `Utils.java`, which has my `addNumbers
 
   ```
   
-1. Android Studio creates dummy test files luckily, for both UI and Unit tests. We will check `ExampleUnitTest.java` for now.
+1. Luckily for us, Android Studio creates dummy test files for both UI and Unit tests. 
   ![testfiles](images/test_files.png)
-1. Add some testing code
+1. Double click `ExampleUnitTest.java` and add some test code
 
 	```
 	package project.testcompany.com.mytestapplication;
@@ -66,54 +66,54 @@ As a preparation, I created a class file: `Utils.java`, which has my `addNumbers
 	}
 	```
 1. Run Unit tests and check the results
-   
- You have multiple choices to run the tests:
- 1. Via Terminal: `cd` to the root dir of the project and run `./gradlew test`
+
+ You can run the tests:
+ 1. Either via Terminal: `cd` to the root dir of the project and run `./gradlew test`
    ![term](images/1__bash.png)
- 1. Using Android Studio, for example from the project window:
+ 1. or using Android Studio, for example from the project window:
    ![projectwindow](images/from_list.png)
    
- The report will be generated under the same path for both case: `PROJECT_ROOT_DIR/app/build/reports/tests/testDebugUnitTest/index.html`
+ The report will be generated under the same path in both cases: `PROJECT_ROOT_DIR/app/build/reports/tests/testDebugUnitTest/index.html`
  
- If all of your tests ran successfully you will see something like this:
+ If all your tests ran successfully you will see something like this:
  
  ![successful](images/result_successful.png)
  
  
- But if you have a failed test case then it can be very helpful too see which one failed and what was the error, so I made a mistake to see what it looks like:
+ If you have a failed test, it is very helpful to see which one failed and what the error was. Let's see what happens if we add an error:
  
  ![mistake](images/fails.png)
  
  ![failed](images/failedresult.png)
  
- also the details are available:
+ The details are also available:
  
  ![details](images/details.png)
  
 ## UI Test
 
-UI test is really useful if we wan't to skip physical testing by clicking through the UI. This is one of the best methods to check what happens on the screen for example when you tap on a button.
+A UI test is really useful if you want to skip physical testing by clicking through the UI and this is one of the best methods to check what happens on the screen for example when you tap a button.
 
-First of all we need to start the test "record".
+First of all, start the test "record".
 
 ![record](images/uitest/Run_and_Menubar_0.png)
 
-Now we need to select device to run the recording on. I have an emulator already, so I select that one.
+Now select the device to run the recording on. (Here, a previously set up emulator is selected.)
 
 ![emu](images/uitest/Select_Deployment_Target_and_activity_main_xml_-_project_-____Desktop_androidtutor_project_1.png)
 
-Then click on add assertion button.
+Then click Add Assertion.
 
 ![addassertion](images/uitest/Record_Your_Test_2.png)
 
-You will see now that the app will launch on the device and after a short loading, the screen of the app will show. This is an interactive "screenshot" where you can click on the "testable" object.
+You will see now how the app is launched on the device and after loading, the screen of the app will show. This is an interactive "screenshot" where you can click on the "testable" object.
 
-I select (the only one) `Hello World` TextView on the screen to check if it's content is `Hello World` for sure. As you can see it is automatically detected all the fields in the **Edit Assertion** section. Looks good, click on **Save Assertion**.
+Select the only thing available: the `Hello World` TextView on the screen to check if its content is `Hello World` for sure. As you can see it has automatically detected all the fields in the **Edit Assertion** section. Looks good, click on **Save Assertion**.
 
 ![addedassertion](images/uitest/Record_Your_Test_3.png)
 
 Click **Ok** and close the popup window in which you can see your assertion list.
-Finally it will ask for a class name with a java file will be created and in which your test code will be generated. You need to have something like this:
+Finally it will ask for a class name with which a java file will be created and in which your test code will be generated. You need end up having something like this:
 
 ![uiresult](images/uitest/MainActivityTest_java_-_project_-____Desktop_androidtutor_project_6.png)
 
