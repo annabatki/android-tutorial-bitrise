@@ -16,7 +16,7 @@ After downloading & installing Android Studio
 
 ## Unit test
 
-A class file (`Utils.java`) was created in advance, which has an `addNumbers` function. This function will be tested to see if it works as expected. (Later this function will be used for testing app functionality as well.)
+A class file (`Utils.java`) was created in advance, which has an `addNumbers` function. This function will be tested to check if it works as expected. (Later this function will be used for testing app functionality as well.)
 
 1. Add the file
 ![utils](images/add_utils_file.png)
