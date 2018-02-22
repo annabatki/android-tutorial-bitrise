@@ -18,10 +18,10 @@ After downloading & installing Android Studio
 
 A class file (`Utils.java`) was created in advance, which has an `addNumbers` function. This function will be tested to check if it works as expected. (Later this function will be used for testing app functionality as well.)
 
-1. Add the file
+1. Add the file to the project and open it.
 ![utils](images/add_utils_file.png)
 
-  The following code snippet was used in the file:
+  The following code snippet was added to the file and used in this tutorial:
 
   ```
   package project.testcompany.com.mytestapplication;
