@@ -18,7 +18,7 @@ After downloading & installing Android Studio
 
 A class file (`Utils.java`) was created in advance, which has an `addNumbers` function. This function will be tested to check if it works as expected. (Later this function will be used for testing app functionality as well.)
 
-1. Add the file to the project and open it.
+1. Add the class file to the project.
 ![utils](images/add_utils_file.png)
 
   The following code snippet was added to the file and used in this tutorial:
@@ -36,10 +36,12 @@ A class file (`Utils.java`) was created in advance, which has an `addNumbers` fu
 
   ```
   
-1. Add the test code
-Luckily, Android Studio creates dummy test files for both UI and Unit tests. 
+1. Add the test code by double clicking `ExampleUnitTest.java`
+
+Luckily, Android Studio has already created dummy test files for both UI and Unit tests. 
   ![testfiles](images/test_files.png)
-Double click `ExampleUnitTest.java` and add the test code, for example:
+
+ Add the test code, for example:
 
 	```
 	package project.testcompany.com.mytestapplication;
